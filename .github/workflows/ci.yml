@@ -1,0 +1,21 @@
+name: research-checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install .
+      - run: python -m unittest discover -s tests -v
+      - run: python -m inverse_witness.cli demo --output /tmp/inverse-witness-demo
+      - run: python -S -m inverse_witness.cli verify /tmp/inverse-witness-demo/query-upper.json --max-gap 1/1000000
+      - run: python -S scripts/verify_results.py results/pilot

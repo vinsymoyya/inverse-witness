@@ -1,0 +1,10 @@
+{
+  "title": "Inverse Witness: Checkable Ambiguity and Minimax Next Measurements",
+  "description": "Research software joining bounded linear inverse-physics ambiguity witnesses, independently checked rational query bounds, and a finite-candidate minimax next-measurement benchmark. Includes a synthetic pilot and a technical note; external scientific review is pending.",
+  "upload_type": "software",
+  "creators": [{"name": "Moyya, Vinsy", "orcid": "0009-0003-0042-3556"}],
+  "license": "mit",
+  "access_right": "open",
+  "version": "0.1.0",
+  "keywords": ["inverse problems", "experimental design", "exact arithmetic", "uncertainty quantification", "reproducible research"]
+}

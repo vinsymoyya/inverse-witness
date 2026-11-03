@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inverse-witness"
+version = "0.1.0"
+description = "Checkable ambiguity witnesses and minimax next measurements for bounded linear inverse physics"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Vinsy Moyya"}]
+dependencies = ["numpy>=1.26,<3", "scipy>=1.13,<2"]
+
+[project.urls]
+Repository = "https://github.com/vinsymoyya/inverse-witness"
+Documentation = "https://github.com/vinsymoyya/inverse-witness#readme"
+
+[project.optional-dependencies]
+figures = ["matplotlib>=3.9,<4"]
+
+[project.scripts]
+inverse-witness = "inverse_witness.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["inverse_witness*"]

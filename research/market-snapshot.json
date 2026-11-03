@@ -1,0 +1,14 @@
+{
+  "research_date": "2026-11-03",
+  "collection": "Displayed counts on public GitHub pages retrieved via web research; caches may lag",
+  "grain": "one selected public repository",
+  "sampling": "purposive adjacent-project sample; not a market census",
+  "repositories": [
+    {"repository": "deepinv/deepinv", "url": "https://github.com/deepinv/deepinv", "stars_displayed": "842", "forks_displayed": "222"},
+    {"repository": "pdebench/PDEBench", "url": "https://github.com/pdebench/PDEBench", "stars_displayed": "1.2k", "forks_displayed": "153"},
+    {"repository": "neuraloperator/neuraloperator", "url": "https://github.com/neuraloperator/neuraloperator", "stars_displayed": "4.0k", "forks_displayed": "941"},
+    {"repository": "leanprover-community/mathlib4", "url": "https://github.com/leanprover-community/mathlib4", "stars_displayed": "4.4k", "forks_displayed": "1.8k"},
+    {"repository": "SakanaAI/AI-Scientist", "url": "https://github.com/SakanaAI/AI-Scientist", "stars_displayed": "14.9k", "forks_displayed": "2.1k"}
+  ],
+  "limitations": ["cumulative counts, not active usage", "rounded values", "no historical series", "selected established projects", "no revenue or TAM estimate"]
+}

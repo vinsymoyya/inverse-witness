@@ -1,0 +1,39 @@
+{
+  "schema": "inverse-witness.synthetic.v1",
+  "state_dimension": 16,
+  "families": [
+    "poisson",
+    "resistor"
+  ],
+  "queries": [
+    "local",
+    "contrast",
+    "total"
+  ],
+  "distributions": [
+    "smooth",
+    "shifted"
+  ],
+  "seeds_per_cell": 4,
+  "training": 1024,
+  "tuning": 128,
+  "calibration": 256,
+  "noise": {
+    "poisson": [
+      "1/20000",
+      "1/4000"
+    ],
+    "resistor": [
+      "1/2000",
+      "1/400"
+    ]
+  },
+  "seed_streams": {
+    "train": 30101,
+    "tune": 30202,
+    "calibration": 30303,
+    "features": 30404,
+    "test_start": 60101
+  },
+  "claim": "Synthetic pilot; no new general theorem, SOTA advantage, or real-data claim"
+}

@@ -1,0 +1,7 @@
+# Versions used for the published CPU pilot and figure/PDF generation.
+# Runtime-only users can install the package from pyproject.toml instead.
+numpy==2.5.4
+scipy==1.18.1
+matplotlib==3.11.2
+reportlab==5.1.0
+pillow==13.0.0

@@ -1,0 +1,12 @@
+include LICENSE README.md CITATION.cff .zenodo.json CHANGELOG.md
+include DATA_CARD.md CONTRIBUTING.md PUBLICATION.md requirements-research.txt
+include VALIDATION.md ARTIFACT_MANIFEST.json .gitattributes .gitignore
+recursive-include .github *.yml
+recursive-include inverse_witness *.py
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include paper *.md
+recursive-include research *.md *.json
+recursive-include assets *.png *.pdf
+recursive-include results *.json *.json.gz *.csv
+recursive-include output/pdf *.pdf
