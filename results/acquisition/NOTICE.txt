@@ -1,0 +1,4 @@
+Measured TCLab data and derived replay records: Apache-2.0.
+Source: APMonitor/arduino, commit f36e65a70dd7122d1829883899e40e56bf6c4279.
+Counterfactual faults and empirical replay code: Inverse Witness / Vinsy Moyya.
+See data/tclab_apmonitor/NOTICE.md for source paths and scope.

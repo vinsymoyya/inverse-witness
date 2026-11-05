@@ -5,6 +5,10 @@ import json
 import os
 from pathlib import Path
 import platform
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from inverse_witness import __version__
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,12 +41,12 @@ def main():
     else:
         # Match the release's eol=lf Git contract before hashing generated text.
         for path in files():
-            if path.suffix.lower() not in {".gz", ".png", ".pdf"}:
+            if path.suffix.lower() not in {".gz", ".png", ".pdf"} and not path.is_relative_to(ROOT / "data/tclab_apmonitor"):
                 content = path.read_bytes()
                 normalized = content.replace(b"\r\n", b"\n")
                 if normalized != content:
                     path.write_bytes(normalized)
-        result = {"schema": "inverse-witness.release-sha256.v1", "version": "0.1.0",
+        result = {"schema": "inverse-witness.release-sha256.v1", "version": __version__,
                   "python": platform.python_version(),
                   "files": {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in files()}}
         MANIFEST.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

@@ -7,6 +7,32 @@ from scipy.optimize import linprog
 from .exact import CertificateError, canonical_hash, dot, dual_ceiling, feasible, parse_problem, verify
 
 
+class InfeasibleProblem(CertificateError):
+    """Inconsistency established by an exactly verified contradiction."""
+    def __init__(self, certificate):
+        super().__init__("Acquisition constraints are exactly inconsistent")
+        self.certificate = certificate
+
+
+def _infeasibility_certificate(problem):
+    B, b, c = parse_problem(problem)
+    n = len(c)
+    relaxed = linprog(np.r_[np.zeros(n), 1.],
+                      A_ub=np.c_[np.asarray(B, dtype=float), -np.ones(len(B))],
+                      b_ub=np.asarray(b, dtype=float), bounds=[(0, 1)] * n + [(0, None)],
+                      method="highs")
+    if not relaxed.success:
+        raise CertificateError("Infeasibility search could not produce a certificate")
+    lam = [max(F(0), quantize(-v)) for v in relaxed.ineqlin.marginals]
+    support = sum((min(F(0), sum((lam[i] * B[i][j] for i in range(len(B))), F(0)))
+                   for j in range(n)), F(0))
+    cert = {"schema": "inverse-witness.box-infeasible.v1", "problem": problem,
+            "problem_sha256": canonical_hash(problem),
+            "proof": {"multipliers": [str(v) for v in lam], "margin": str(support - dot(b, lam))}}
+    verify(cert)
+    return cert
+
+
 def quantize(value):
     return F(float(value)).limit_denominator(10**12)
 
@@ -55,6 +81,8 @@ def maximize(problem):
                      b_ub=bf if len(B) else None, bounds=[(0, 1)] * n,
                      method="highs", options={"dual_feasibility_tolerance": 1e-9,
                                                "primal_feasibility_tolerance": 1e-9})
+    if result.status == 2:
+        raise InfeasibleProblem(_infeasibility_certificate(problem))
     if not result.success:
         raise CertificateError("LP search did not succeed: " + result.message)
     x = _repair(B, b, [quantize(v) for v in result.x], Bf, bf)
@@ -82,6 +110,17 @@ def interval(A, y, epsilon, c):
     lo = maximize(make_problem(B, b, [-F(v) for v in c], {"role": "negative-query-upper"}))
     return {"lower": -F(lo["proof"]["upper"]), "upper": F(hi["proof"]["upper"]),
             "witness_lower": -F(lo["proof"]["lower"]), "witness_upper": F(hi["proof"]["lower"]),
+            "low_certificate": lo, "high_certificate": hi}
+
+
+def interval_acquisition(document):
+    """Bound a query after mapping actual channel records and calibration intervals."""
+    from .acquisition import acquisition_hash, compile_acquisition
+    B, b, c = compile_acquisition(document)
+    meta = {"acquisition_sha256": acquisition_hash(document)}
+    hi = maximize(make_problem(B, b, c, dict(meta, role="query-upper")))
+    lo = maximize(make_problem(B, b, [-v for v in c], dict(meta, role="negative-query-upper")))
+    return {"lower": -F(lo["proof"]["upper"]), "upper": F(hi["proof"]["upper"]),
             "low_certificate": lo, "high_certificate": hi}
 
 

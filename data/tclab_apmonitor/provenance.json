@@ -1,0 +1,43 @@
+{
+  "commit": "f36e65a70dd7122d1829883899e40e56bf6c4279",
+  "files": [
+    {
+      "git_blob_sha": "8dada3edaf50dbc082c9a125058f25def75e625a",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "file": "LICENSE",
+      "upstream_path": "LICENSE"
+    },
+    {
+      "git_blob_sha": "b5bac0e99fd4d041806b6df6bae0909a72ca3c63",
+      "sha256": "7119f2babb15293d2a63d5632643ff14d38cf5aa4fba8df753838dd03e5f80a2",
+      "file": "README.upstream.md",
+      "upstream_path": "README.md"
+    },
+    {
+      "git_blob_sha": "7a1d82f52434496bb370e9f29ee7734b8ddef630",
+      "sha256": "10278caee2b095cca028e19acd9146157a75cdd8426e0490231de7a9def8ebdc",
+      "file": "mimo_data.csv",
+      "upstream_path": "2_Regression/Energy_balance_MIMO/Python_minimize/data.txt"
+    },
+    {
+      "git_blob_sha": "b34ac66c551257f0c173adbe30c95f28b5e023a9",
+      "sha256": "60d009e96a592c3379cf2808cc06180ff517fd28b133eea9edf7038ce2d76b01",
+      "file": "second_order_data.csv",
+      "upstream_path": "2_Regression/2nd_order_MIMO/GEKKO/data.txt"
+    },
+    {
+      "git_blob_sha": "3b9dbe395844fd9384bb602f57abfdca7169788a",
+      "sha256": "f4bec167c7849a0eed808163ec917fff04880ae2ce95d5784edbe7544668d1d8",
+      "file": "generate_data.py.txt",
+      "upstream_path": "2_Regression/2nd_order_MIMO/GEKKO/generate_data.py"
+    },
+    {
+      "git_blob_sha": "ccfbb57a4333021e3f1feae704010ec46562da66",
+      "sha256": "0c1e0e6d44f32e8812bb0e85d891f5a9773aca1c2e382cc8434f29b2fe4b32f3",
+      "file": "mimo_fit.py.txt",
+      "upstream_path": "2_Regression/Energy_balance_MIMO/Python_minimize/mimo_fit.py"
+    }
+  ],
+  "repository": "APMonitor/arduino",
+  "license": "Apache-2.0"
+}

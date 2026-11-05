@@ -10,3 +10,5 @@ recursive-include research *.md *.json
 recursive-include assets *.png *.pdf
 recursive-include results *.json *.json.gz *.csv
 recursive-include output/pdf *.pdf
+recursive-include data/tclab_apmonitor *
+include results/acquisition/LICENSE results/acquisition/NOTICE.txt

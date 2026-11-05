@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Please cite this software and the established methods referenced in paper/METHODS.md."
 type: software
 title: "Inverse Witness: Checkable Ambiguity and Minimax Next Measurements"
-version: 0.1.0
-date-released: 2026-11-03
+version: 0.2.0
+date-released: 2026-11-05
 authors:
   - family-names: "Moyya"
     given-names: "Vinsy"
@@ -11,7 +11,7 @@ authors:
 license: MIT
 repository-code: "https://github.com/vinsymoyya/inverse-witness"
 url: "https://github.com/vinsymoyya/inverse-witness"
-abstract: "Research software for bounded linear inverse physics: exact rational ambiguity certificates, scalar query bounds, and finite-candidate minimax next measurements. Synthetic pilot; external scientific review pending."
+abstract: "Research software for bounded linear inverse physics: rational ambiguity bounds, minimax next measurements, calibrated acquisition intervals, and exact inconsistency proofs. Includes a synthetic pilot and a measured thermal-acquisition failure study; external scientific review pending."
 keywords:
   - inverse problems
   - experimental design

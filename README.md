@@ -6,7 +6,24 @@ Inverse Witness is a small physics–math research toolkit for bounded linear in
 
 ![Two admissible sources explain the current thermometers; candidate next sensors are ranked by remaining ambiguity](assets/ambiguity-demo.png)
 
-**Research status:** synthetic pilot and technical note, external scientific review pending. The theory builds on strict bounds, optimal recovery and worst-case sensor design. This release does not establish a new general theorem, a solution to a famous open conjecture, or state-of-the-art AI performance.
+**Research status:** synthetic pilot plus a measured-acquisition failure study, external scientific review pending. The theory builds on strict bounds, optimal recovery and worst-case sensor design. Accurate reconstruction across real acquisitions is not established.
+
+## Measured acquisitions and failure cases
+
+The [new study](paper/ACQUISITION_STUDY.md) uses **800 original rows from two public TCLab hardware records**, with pinned source hashes and an Apache 2.0 data license. It evaluates 640 correlated replay cases across calibration errors, missing samples, quantization, saturation, clock errors, channel swaps and stale readings. Injected faults are labeled separately from the original measured data.
+
+The result is a warning about model transfer: the frozen empirical model is inconsistent in **24/25 windows of the separate acquisition**. Metadata-aware handling can preserve admissibility by widening bounds, but many then become uninformative. The software retains these failures and verifies 912 endpoint or inconsistency certificates.
+
+![Measured acquisition failure cases](assets/acquisition-failures.png)
+
+From this checkout:
+
+```bash
+python -m inverse_witness.cli acquisition --output results/my-acquisition --data data/tclab_apmonitor
+python -S scripts/verify_acquisition.py results/acquisition
+```
+
+For custom bounded linear acquisitions, use `compile_acquisition` and `interval_acquisition`. Observations bind by stable row IDs and may contain one-sided intervals, per-row noise, positive gain/offset ranges and operator-error bounds. Source coordinates still belong to `[0,1]`. An inconsistent acquisition raises `InfeasibleProblem` carrying an exactly checkable contradiction. See [data and calibration assumptions](DATA_CARD.md).
 
 ## Run the example
 
@@ -71,10 +88,11 @@ The declared pilot has 96 correlated query instances from 16 distinct test sourc
 ## Research and participation
 
 - [Opportunity analysis and adoption strategy](research/MARKET_RESEARCH.md)
-- [Technical-note PDF](output/pdf/inverse-witness-technical-note.pdf)
+- [Original synthetic-pilot technical note, v0.1](output/pdf/inverse-witness-technical-note.pdf)
+- [Measured-acquisition study, v0.2](paper/ACQUISITION_STUDY.md)
 - [Contribution guide](CONTRIBUTING.md): new operators, counterexamples, independent reproductions and learned sensor policies
 - [Publication and ORCID route](PUBLICATION.md)
 
 The useful next research target is a fast learned measurement policy with certified regret on held-out operators. It has not been trained here. New nonlinear or experimental data needs its own validity argument.
 
-**Author:** Vinsy Moyya · [ORCID](https://orcid.org/0009-0003-0042-3556). Code and generated synthetic records: [MIT](LICENSE). Cite via [CITATION.cff](CITATION.cff), and separately credit the established methods in the technical note.
+**Author:** Vinsy Moyya · [ORCID](https://orcid.org/0009-0003-0042-3556). Code and original synthetic records: [MIT](LICENSE). Imported and derived measured-data records retain [Apache-2.0 attribution](data/tclab_apmonitor/NOTICE.md). Cite via [CITATION.cff](CITATION.cff), and separately credit the datasets and established methods.
