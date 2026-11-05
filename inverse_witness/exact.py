@@ -59,6 +59,8 @@ def dual_ceiling(B, b, c, multipliers):
 
 def verify(certificate, max_gap=None):
     """Verify a maximization bracket; never use a floating-point tolerance."""
+    if certificate.get("schema") == "inverse-witness.box-infeasible.v1":
+        return verify_infeasibility(certificate)
     if certificate.get("schema") != "inverse-witness.box-max.v1":
         raise CertificateError("Unknown schema")
     problem = certificate.get("problem", {})
@@ -84,3 +86,21 @@ def verify(certificate, max_gap=None):
         raise CertificateError("Certificate gap exceeds requested bound")
     return {"lower": str(lower), "upper": str(upper), "gap": str(gap),
             "problem_sha256": canonical_hash(problem)}
+
+
+def verify_infeasibility(certificate):
+    """Check a boxed Farkas contradiction: min_box lambda.Bx > lambda.b."""
+    problem = certificate.get("problem", {})
+    if canonical_hash(problem) != certificate.get("problem_sha256"):
+        raise CertificateError("Problem hash mismatch")
+    B, b, c = parse_problem(problem)
+    proof = certificate.get("proof", {})
+    lam = [rational(v) for v in proof.get("multipliers", [])]
+    if len(lam) != len(B) or any(v < 0 for v in lam):
+        raise CertificateError("Invalid infeasibility multipliers")
+    support = sum((min(Fraction(0), sum((lam[i] * B[i][j] for i in range(len(B))), Fraction(0)))
+                   for j in range(len(c))), Fraction(0))
+    margin = support - dot(b, lam)
+    if margin <= 0 or margin != rational(proof.get("margin")):
+        raise CertificateError("No exact infeasibility contradiction")
+    return {"status": "infeasible", "margin": str(margin), "problem_sha256": canonical_hash(problem)}

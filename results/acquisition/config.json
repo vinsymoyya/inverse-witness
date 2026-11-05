@@ -1,0 +1,28 @@
+{
+  "schema": "inverse-witness.acquisition-replay.v1",
+  "source_repository": "APMonitor/arduino",
+  "source_commit": "f36e65a70dd7122d1829883899e40e56bf6c4279",
+  "source_license": "Apache-2.0",
+  "variations": [
+    "nominal",
+    "gain",
+    "offset_drift",
+    "dropout",
+    "quantization",
+    "saturation",
+    "clock_scale",
+    "channel_swap",
+    "stale_sample",
+    "out_of_budget"
+  ],
+  "handling_modes": [
+    "naive",
+    "aware"
+  ],
+  "window_transitions": 8,
+  "within_record_stride": 8,
+  "cross_record_stride": 24,
+  "uninformative_width_threshold": "99/100",
+  "maximum_certificate_gap": "1/1000000",
+  "claim": "Real recorded temperatures and commands; injected faults are counterfactual replay. Empirical calibration is not a physical guarantee."
+}

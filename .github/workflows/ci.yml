@@ -19,3 +19,5 @@ jobs:
       - run: python -m inverse_witness.cli demo --output /tmp/inverse-witness-demo
       - run: python -S -m inverse_witness.cli verify /tmp/inverse-witness-demo/query-upper.json --max-gap 1/1000000
       - run: python -S scripts/verify_results.py results/pilot
+      - run: python -S scripts/verify_acquisition.py results/acquisition
+      - run: python -S scripts/seal_artifact.py --verify
