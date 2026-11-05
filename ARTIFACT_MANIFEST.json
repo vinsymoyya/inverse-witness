@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "python": "3.12.14",
   "files": {
-    ".gitattributes": "0bb05b3ee427393a49bfc407a71f9c68c4acc2a746dd45a0fc0dd380c49d0597",
+    ".gitattributes": "98a4c9f44f33111c0c4410d458e604b215f5709760f676776d0d16badb69b0de",
     ".github/workflows/ci.yml": "a59723870f59b9fb35c8dc1fd5908faa698c79ab90e27cad9743caf491324bb5",
     ".gitignore": "a33f9a98728e3ca81ba7f2a9eecb58611bdb290f2e33f983408550aafe1e4594",
     ".zenodo.json": "f9653d0bdccfdbdea586d923a89e7271b67c526137b3b38700800adcc76ea809",
