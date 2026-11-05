@@ -4,7 +4,7 @@
 
 Fresh local evidence on 5 November 2026:
 
-- `python -m unittest discover -s tests -v`: 39 tests pass, including the original 19 checks and 20 acquisition/real-record checks. Tests cover exact contradictions, 1e-18 infeasibility violations, censored observations, negative operator entries, calibration/error corners, row identity, malformed input, chronology, stale readings, and isolation of evaluation labels from identification.
+- `python -m unittest discover -s tests -v`: 39 tests pass, including the original 19 checks and 20 acquisition/real-record checks. Tests cover exact contradictions, rejection of 1e-18 primal-witness violations, censored observations, negative operator entries, calibration/error corners, row identity, malformed input, chronology, stale readings, and isolation of evaluation labels from identification.
 - `python -S scripts/verify_acquisition.py results/acquisition`: all 640 cases and 912 mathematical certificates replay without third-party dependencies. Raw SHA-256/Git blob provenance, physical/model binding, exact endpoint and infeasibility proofs, reference audits and all group metrics agree.
 - `python -S scripts/verify_results.py results/pilot`: all original 2,146 certificates still replay after the acquisition changes.
 - Measured-record and failure-case figures were rendered and visually inspected. The original v0.1 PDF remains a baseline artifact; the new study is `paper/ACQUISITION_STUDY.md`.

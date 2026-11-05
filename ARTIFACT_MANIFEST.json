@@ -7,11 +7,11 @@
     ".github/workflows/ci.yml": "a59723870f59b9fb35c8dc1fd5908faa698c79ab90e27cad9743caf491324bb5",
     ".gitignore": "a33f9a98728e3ca81ba7f2a9eecb58611bdb290f2e33f983408550aafe1e4594",
     ".zenodo.json": "f9653d0bdccfdbdea586d923a89e7271b67c526137b3b38700800adcc76ea809",
-    "assets/acquisition-failures.pdf": "797e60b6147a3ba5530fca10b005bf76724cb6e73622f75c5f41565c03da80d3",
+    "assets/acquisition-failures.pdf": "38365abbbc0801d3b9ae41ca9c1697fc38738dd382b1c2accf6a1908f8d06540",
     "assets/acquisition-failures.png": "bc0d03c084acf6cf78e2a16fa09deac7d1f3ef1090afb8d8c98ebd17007d3b37",
     "assets/ambiguity-demo.pdf": "bb6ca9b0c441c4fad998a701cb05d6baecdb838f4099af5969ae90465112eeee",
     "assets/ambiguity-demo.png": "23b46a9625a9d57efcbdeaf05f10a70afcdfe37304ae5352327bd67299a81b16",
-    "assets/measured-thermal-records.pdf": "020e79dbd9ad1fef017fc2eec0d47040f292188fd43d4a40104f363d83594d8f",
+    "assets/measured-thermal-records.pdf": "103c39aa4914b4a4636d654709122a36883d87f0228b3943a35ac21a7a0442a8",
     "assets/measured-thermal-records.png": "6ed57018e6e5ae215e308b1521596d24e253051d0127f4ed81e123d53569fc06",
     "assets/pilot-results.pdf": "d1ef67d1f33c0ae7dae73bc474393bfdbf88e8ddcf8f0ac424f999455c78d957",
     "assets/pilot-results.png": "5b5483c8d459de4dbbf629830ce9e942d55520baca319ca362a04d0832e7d4fb",
@@ -26,7 +26,7 @@
     "data/tclab_apmonitor/provenance.json": "5fc81a179e78323b6e9525b19083ccf73fb7b4fe6512cd703eef52dd099e192f",
     "data/tclab_apmonitor/README.upstream.md": "7119f2babb15293d2a63d5632643ff14d38cf5aa4fba8df753838dd03e5f80a2",
     "data/tclab_apmonitor/second_order_data.csv": "60d009e96a592c3379cf2808cc06180ff517fd28b133eea9edf7038ce2d76b01",
-    "DATA_CARD.md": "14800c9fa430c701c445664068e934316ec90121376213cf7b6aa61cd4dd8333",
+    "DATA_CARD.md": "5fc790ea0fd2b91f9f7e221a37792b91fb4b1f61953fdba1c317f5f8af3b7fbd",
     "inverse_witness/__init__.py": "2af592351e0b568224094d0af60575557eca25822c0ada2239da00b69d84b12a",
     "inverse_witness/acquisition.py": "8b0d29d399af599ce52017865888c18db7eda77b8ad13e6941e1edbc8e87d567",
     "inverse_witness/acquisition_experiment.py": "57b861ff2104c90375e8bacea2acde9eb000c013f9209cf67e430ece615a00ef",
@@ -39,7 +39,7 @@
     "LICENSE": "028e22c04d5de459b98a505e2bfda1c3bf2cb2087932818c3cbd408c0044f2ba",
     "MANIFEST.in": "38f978f6396252408d3a7646026bf17c8cad6c25142795b9416297faa3bbecc8",
     "output/pdf/inverse-witness-technical-note.pdf": "a9fd6fb744906e18e7a8dbfb3f5048fb88045aa3adb8866291a556b98a5edcea",
-    "paper/ACQUISITION_STUDY.md": "4da48486833494a28970ef1fa9f81b35ab3af47eaafa7fc804f8bfb4dd25f9fb",
+    "paper/ACQUISITION_STUDY.md": "7ce028677b92af915d54ef8d73a93eff697b30e0e04fca36c64b76da87b4e1d9",
     "paper/METHODS.md": "56f3450a1acd9e002d8784e197c2b1e17fb21176da5e549f2c5d96aaea16dec0",
     "paper/RESULTS.md": "1053006462cc8fc23def74fd68462bfb350465568fddaddd8f642f565618719b",
     "PUBLICATION.md": "8f2b4505a920c984c7f9de07323c23802a9c96ca4e619a65f4b392b2a2e35aef",
@@ -819,7 +819,7 @@
     "scripts/build_paper.py": "e39100b91bbc12a54cc993cd8a77629035fa4f5f4259096efd4e99943588bd9e",
     "scripts/inspect_pdf.py": "15ffa72d1e695bc6ab147fe5c5b941ed1b646ba28cf8bfff0e7534de2fb926ab",
     "scripts/make_figures.py": "db13771a91a9860b6c44ef01fdf97617c16eb5d8d3025a3fd8eac226d55b2cee",
-    "scripts/report_acquisition.py": "3cd0a81dbdedc1be00753f4cdbee5a20f4d05fe530e0af73077299f5a80b82bf",
+    "scripts/report_acquisition.py": "aecf58374ab2a1c73e78c9ffe4f22589913b18d21331276c248bf2d95e9e6f81",
     "scripts/seal_artifact.py": "2f351ed3ec75b86827b52c790e70cd26a8ed31bdc94e172bbe8f4dab4803afec",
     "scripts/verify_acquisition.py": "7ea5417423e9d921366a988a21679dc996a669935d213bd6513c68fcaab13fd2",
     "scripts/verify_results.py": "b7e9697c72d45c056e984f3ac6383b6508dd1970df4dbbe2c48f7f13271b8926",
@@ -827,6 +827,6 @@
     "tests/test_exact.py": "053f936d05992c785b33e5b1182fc6d2d967cab0a5e101dfe1949b39bd8aa391",
     "tests/test_physics_and_design.py": "bec73abcffefd7934deafe97a18a03820e8b5409ceb8c4d98415d58d9a106139",
     "tests/test_thermal.py": "004c8747eb85d5cc831220846fab821d8499703e18256021bdaa420fc9839882",
-    "VALIDATION.md": "38cf43ca34a5b75b8eab936341834434bf2e5404df2017fca9ba2c2b6b2c0ba9"
+    "VALIDATION.md": "c4f0bd0deeb15687dc4939f5792ce29d1c8da70476a7b5eadf2b75bb2ae1570a"
   }
 }

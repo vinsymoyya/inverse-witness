@@ -6,6 +6,8 @@ The original `results/pilot` study is synthetic, with code and generated synthet
 
 The files contain 201 and 599 rows of elapsed time, heater commands and two measured temperatures. One also contains setpoints. Acquisition documentation uses hardware `TCLab()` reads. We did not operate the device or independently verify calibration, common device identity or a traceable heat-input reference. Logged heater commands are the evaluation reference; they are not independently measured heat flux.
 
+The parser represents elapsed times and temperatures by rounding to 1e-6 seconds and C, and commands to 1e-6 percentage points (1e-8 of the full range). This numerical canonicalization does not imply instrument precision. Original CSV bytes are preserved.
+
 Only the 201-row record fits the empirical model: transitions 1..99 train coefficients, 100..139 set maximum calibration residual budgets, and windows starting at 140 or later evaluate a chronological holdout. The 599-row record is an additional acquisition used only for evaluation. Boundary temperature states are shared across adjacent time blocks, and all replay variations of a window are correlated. Two files are not a population of independent devices.
 
 Original measurements are never replaced by generated temperatures. Added gain, drift, dropout, quantization, saturation, timing, channel-order, stale-reading and exceeded-specification faults are explicit counterfactual replay. The aware arm receives declared metadata; it is not an autonomous fault-diagnosis system. The offline audit can compare declarations with the unmodified record; a deployed system would not have that reference.

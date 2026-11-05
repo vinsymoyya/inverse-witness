@@ -10,6 +10,8 @@ We downloaded and pinned two upstream-reported hardware TCLab records from [APMo
 
 The original measured temperatures are used directly. Faults below are counterfactual modifications of those records, not claims that the upstream experiment had those labeled faults. Heater-command percentages are evaluation references; they are not independently measured heat flux or temperature-field ground truth.
 
+For rational arithmetic, the parser rounds elapsed times and temperatures to 1e-6 seconds and C, and commands to 1e-6 percentage points (1e-8 of the full command range). Original CSV bytes remain unchanged. These are numerical representation choices, not claims of instrument precision.
+
 ## Frozen identification and evaluation contract
 
 Fit a two-output empirical ARX model to temperature **rates**, using current temperature, previous measured rate, a constant, and both heater commands. Coefficients are fitted on transitions 1..99 of the 201-row record, then rounded to rational values. The residual-rate budget for each temperature is the **maximum absolute residual on transitions 100..139**, not a proved hardware noise bound. Frozen budgets are 0.102839 and 0.119767 C/s. The training design condition number is 509.5.
@@ -48,6 +50,8 @@ The completed run has **640 replay cases and 912 exact certificates**, with 0 un
 Without injected faults, the same-record holdout has **2/7 inconsistent windows**. Of 5 bounded windows, 4 have width >=0.99. On the separate acquisition, **24/25 windows are inconsistent**, and the full logged command vector is admissible in only 0/25. A query mean can fall inside a wide interval even when the full reference vector violates the model; query coverage alone does not validate the physics.
 
 Across counterfactual replays, naive handling has 0 bounded intervals excluding the reference mean, and aware handling has 1. These are descriptive counts for matched, correlated cases, not general failure probabilities. Aware handling need not reduce every failure count: dropping contradictory information can reveal a feasible but wrong model that was previously rejected. Wider intervals can hide a misspecified sensor budget. In particular, the deliberately exceeded offset specification must not be called valid merely because its interval is nonempty.
+
+One concrete case is `second_order_data-0148-dropout-aware`: the checked interval is [0.000000, 0.947266], while the logged reference mean is 0.961305. The missing-data assumptions hold against the original digital record, but the baseline model residual budget fails. Removing unavailable rows restores feasibility without fixing model mismatch, and the reference mean is still excluded. This is a retained failure, not a successful reconstruction.
 
 | Record | Variation | Handling | Cases | Proved inconsistent | Bounded mean excluded | Width >=0.99 | Input assumptions hold |
 |---|---|---|---:|---:|---:|---:|---:|

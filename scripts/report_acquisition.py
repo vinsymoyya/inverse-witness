@@ -1,5 +1,6 @@
 """Figures and failure analysis generated from verified acquisition-case metrics."""
 import csv
+import gzip
 from fractions import Fraction as F
 import json
 import os
@@ -94,6 +95,9 @@ def main():
     same, other = group(datasets[0]), group(datasets[1])
     naive = sum(r["silent_failure"] == "True" for r in records if r["handling"] == "naive")
     aware = sum(r["silent_failure"] == "True" for r in records if r["handling"] == "aware")
+    failure_id = "second_order_data-0148-dropout-aware"
+    with gzip.open(directory / "cases" / (failure_id + ".json.gz"), "rt") as stream:
+        failure = json.load(stream)
     text = f'''# Measured acquisitions and failure cases
 
 Research date: 5 November 2026. **The empirical model does not transfer reliably to the second acquisition.** Correct sensor handling prevents specific acquisition mistakes, but can also produce intervals too wide to support a useful answer. This is a negative-results study, not real-world validation of accurate source reconstruction.
@@ -105,6 +109,8 @@ We downloaded and pinned two upstream-reported hardware TCLab records from [APMo
 ![Original recorded temperatures and commands](../assets/measured-thermal-records.png)
 
 The original measured temperatures are used directly. Faults below are counterfactual modifications of those records, not claims that the upstream experiment had those labeled faults. Heater-command percentages are evaluation references; they are not independently measured heat flux or temperature-field ground truth.
+
+For rational arithmetic, the parser rounds elapsed times and temperatures to 1e-6 seconds and C, and commands to 1e-6 percentage points (1e-8 of the full command range). Original CSV bytes remain unchanged. These are numerical representation choices, not claims of instrument precision.
 
 ## Frozen identification and evaluation contract
 
@@ -144,6 +150,8 @@ The completed run has **{summary["cases"]} replay cases and {summary["certificat
 Without injected faults, the same-record holdout has **{same["inconsistent"]}/{same["cases"]} inconsistent windows**. Of {same["bounded"]} bounded windows, {same["uninformative"]} have width >=0.99. On the separate acquisition, **{other["inconsistent"]}/{other["cases"]} windows are inconsistent**, and the full logged command vector is admissible in only {other["reference_feasible"]}/{other["cases"]}. A query mean can fall inside a wide interval even when the full reference vector violates the model; query coverage alone does not validate the physics.
 
 Across counterfactual replays, naive handling has {naive} bounded intervals excluding the reference mean, and aware handling has {aware}. These are descriptive counts for matched, correlated cases, not general failure probabilities. Aware handling need not reduce every failure count: dropping contradictory information can reveal a feasible but wrong model that was previously rejected. Wider intervals can hide a misspecified sensor budget. In particular, the deliberately exceeded offset specification must not be called valid merely because its interval is nonempty.
+
+One concrete case is `{failure_id}`: the checked interval is [{float(F(failure["interval"]["lower"])):.6f}, {float(F(failure["interval"]["upper"])):.6f}], while the logged reference mean is {failure["metrics"]["reference_query"]:.6f}. The missing-data assumptions hold against the original digital record, but the baseline model residual budget fails. Removing unavailable rows restores feasibility without fixing model mismatch, and the reference mean is still excluded. This is a retained failure, not a successful reconstruction.
 
 | Record | Variation | Handling | Cases | Proved inconsistent | Bounded mean excluded | Width >=0.99 | Input assumptions hold |
 |---|---|---|---:|---:|---:|---:|---:|
